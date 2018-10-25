@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#efefef"
+    tools:context="sv.dk.com.dimeunahistoria.SeccionView">
+
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:cardCornerRadius="25dp"
+        android:layout_margin="25dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <Button
+                android:onClick="escucharSeccion"
+                android:layout_width="wrap_content"
+                android:layout_height="45dp"
+                android:layout_marginTop="70dp"
+                android:layout_marginRight="15dp"
+                android:drawableRight="@drawable/play"
+                android:layout_alignParentRight="true"
+                android:text="Escuchar "
+                android:textSize="12dp"
+                android:textColor="#fff"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:background="@drawable/buttoncolorborder"/>
+
+            <ImageView
+                android:id="@+id/imagenHistoria"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:scaleType="centerCrop"
+                app:srcCompat="@drawable/prueba" />
+
+            <TextView
+                android:id="@+id/txtTituloSeccion"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Titulo"
+                android:textColor="#fff"
+                android:background="#90151515"
+                android:layout_above="@id/scrollViewSeccion"
+                android:paddingLeft="25dp"
+                android:textSize="10dp"
+                android:paddingTop="5dp"
+                android:paddingBottom="5dp"/>
+
+            <ScrollView
+                android:id="@+id/scrollViewSeccion"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/imagenHistoria"
+                android:padding="25dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/txtSubtituloSeccion"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="SubTitulo"
+                        android:textSize="18dp"
+                        android:textStyle="bold"/>
+
+                    <TextView
+                        android:id="@+id/txtContenidoHistoria"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:justificationMode="inter_word"
+                        android:layout_marginBottom="45dp"/>
+
+                </LinearLayout>
+
+            </ScrollView>
+
+            <TextView
+                android:id="@+id/txtNumPagina"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Pagina"
+                android:textStyle="italic"
+                android:layout_above="@id/botones"
+                android:textAlignment="center"/>
+
+            <LinearLayout
+                android:id="@+id/botones"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_alignParentBottom="true"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/bottomAtras"
+                    android:text="Anterior"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="#292929"
+                    android:drawableLeft="@drawable/izquierda"
+                    android:paddingLeft="15dp"
+                    android:textColor="#fff"
+                    />
+
+                <Button
+                    android:id="@+id/bottomAdelante"
+                    android:text="Siguiente"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="#292929"
+                    android:drawableRight="@drawable/derecha"
+                    android:paddingRight="15dp"
+                    android:textColor="#fff" />
+
+            </LinearLayout>
+
+
+        </RelativeLayout>
+
+    </android.support.v7.widget.CardView>
+
+</RelativeLayout>

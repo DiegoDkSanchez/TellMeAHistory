@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#efefef"
+    tools:context="sv.dk.com.dimeunahistoria.HistoriaDetalle">
+
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:cardCornerRadius="25dp"
+        android:layout_margin="25dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/portadaDetalle"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="centerCrop"
+                app:srcCompat="@drawable/prueba" />
+
+            <LinearLayout
+                android:id="@+id/fondoDetalle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_centerVertical="true"
+                android:padding="25dp"
+                android:background="@color/negroStandarOpacity"
+                >
+
+                <TextView
+                    android:id="@+id/txtTituloDetalle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="#fff"
+                    android:textAlignment="center"
+                    android:textStyle="bold"
+                    android:text="Titulo"
+                    android:textSize="46dp"
+                    android:layout_gravity="center"/>
+                <TextView
+                    android:id="@+id/txtCategoriaDetalle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Categoria"
+
+                    android:textStyle="bold"
+                    android:textColor="#fff"
+                    android:layout_gravity="center"/>
+
+                <TextView
+                    android:id="@+id/txtAutorDetalle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Autor"
+                    android:textColor="#fff"
+                    android:layout_gravity="center"/>
+            </LinearLayout>
+
+            <Button
+                android:onClick="leerAhora"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/fondoDetalle"
+                android:paddingLeft="35dp"
+                android:paddingRight="35dp"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="35dp"
+                android:background="@drawable/buttoncorner"
+                android:text="Leer ahora"
+                android:textColor="#fff"/>
+
+        </RelativeLayout>
+
+    </android.support.v7.widget.CardView>
+
+</RelativeLayout>

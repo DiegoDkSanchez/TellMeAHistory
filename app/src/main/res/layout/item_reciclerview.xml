@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent" android:layout_height="wrap_content">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="200dp">
+
+           <!-- <Button
+                android:id="@+id/txthistoriacategoria"
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:layout_margin="25dp"
+                android:paddingLeft="15dp"
+                android:paddingRight="15dp"
+                android:text="Categoria"
+                android:textColor="#fff"
+                android:textSize="10dp"
+                android:background="@drawable/buttoncolorborder"/> -->
+
+            <ImageView
+                android:id="@+id/txthistoriaportada"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:scaleType="fitCenter"
+                app:srcCompat="@drawable/prueba" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:orientation="vertical"
+                android:paddingLeft="25dp"
+                android:paddingTop="25dp"
+                android:paddingBottom="15dp"
+                android:background="@drawable/degradadoanegro">
+
+                <TextView
+                    android:id="@+id/txthistoriatitulo"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textStyle="bold"
+                    android:layout_above="@id/txthistoriaautor"
+                    android:text="Titulo de la historia"
+                    android:textColor="#fff" />
+
+                <TextView
+                    android:id="@+id/txthistoriaautor"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:textSize="10dp"
+                    android:text="Autor"
+                    android:textColor="#fff" />
+
+            </LinearLayout>
+
+
+        </RelativeLayout>
+</RelativeLayout>

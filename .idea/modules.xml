@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://C:\Users\DK-Ragnar\Documents\CuentameUnaHistoria\tell_me_a_story_childrens\Avance.iml" filepath="C:\Users\DK-Ragnar\Documents\CuentameUnaHistoria\tell_me_a_story_childrens\Avance.iml" />
+      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/tell_me_a_story_childrens.iml" filepath="$PROJECT_DIR$/tell_me_a_story_childrens.iml" />
+    </modules>
+  </component>
+</project>
