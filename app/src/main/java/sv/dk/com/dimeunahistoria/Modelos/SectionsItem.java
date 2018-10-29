@@ -32,6 +32,11 @@ public class SectionsItem implements Serializable {
 	@SerializedName("deleted_at")
 	private Object deletedAt;
 
+	@SerializedName("audio_url")
+	private String audioUrl;
+
+
+
 	@SerializedName("url")
 	private String url;
 
@@ -45,7 +50,13 @@ public class SectionsItem implements Serializable {
 		url = in.readString();
 	}
 
+	public String getAudioUrl() {
+		return audioUrl;
+	}
 
+	public void setAudioUrl(String audioUrl) {
+		this.audioUrl = audioUrl;
+	}
 	public void setIdStory(int idStory){
 		this.idStory = idStory;
 	}
@@ -112,16 +123,16 @@ public class SectionsItem implements Serializable {
 
 	@Override
  	public String toString(){
-		return 
-			"SectionsItem{" + 
-			"id_story = '" + idStory + '\'' + 
-			",updated_at = '" + updatedAt + '\'' + 
-			",name = '" + name + '\'' + 
-			",description = '" + description + '\'' + 
-			",created_at = '" + createdAt + '\'' + 
-			",id = '" + id + '\'' + 
-			",deleted_at = '" + deletedAt + '\'' + 
-			",url = '" + url + '\'' + 
+		return
+			"SectionsItem{" +
+			"id_story = '" + idStory + '\'' +
+			",updated_at = '" + updatedAt + '\'' +
+			",name = '" + name + '\'' +
+			",description = '" + description + '\'' +
+			",created_at = '" + createdAt + '\'' +
+			",id = '" + id + '\'' +
+			",deleted_at = '" + deletedAt + '\'' +
+			",url = '" + url + '\'' +
 			"}";
 		}
 }

@@ -1,6 +1,9 @@
 package sv.dk.com.dimeunahistoria;
 
 import android.content.Intent;
+import android.media.AudioManager;
+import android.media.MediaPlayer;
+import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.CardView;
@@ -12,6 +15,7 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 import sv.dk.com.dimeunahistoria.Modelos.Historia;
@@ -24,7 +28,7 @@ public class SeccionView extends AppCompatActivity {
 
     ImageView imagen;
     TextView contenido, titulo, subtitulo, numPaginas;
-    Button atras, adelante;
+    Button atras, adelante, listenButton;
     CardView cardView;
 
     private int pagina;
@@ -33,6 +37,7 @@ public class SeccionView extends AppCompatActivity {
     private SectionsItem seccion;
     private boolean NotIsFinalPage = true;
     private ArrayList<Seccion> secciones = new ArrayList<>();
+    MediaPlayer mediaPlayer = new MediaPlayer();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +45,7 @@ public class SeccionView extends AppCompatActivity {
         setContentView(R.layout.activity_seccion_view);
 
         //FindViewById
+        listenButton = findViewById(R.id.listenButton);
         imagen = (ImageView) findViewById(R.id.imagenHistoria);
         contenido = (TextView) findViewById(R.id.txtContenidoHistoria);
         atras = (Button) findViewById(R.id.bottomAtras);
@@ -93,11 +99,13 @@ public class SeccionView extends AppCompatActivity {
                     overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_left);
                     speakRequest.stopSpeak();
                     finish();
+                    StopMedia();
                 }else {
                     Intent intent = new Intent(SeccionView.this, HistoriaDetalle.class);
                     intent.putExtra("historia", historia);
                     startActivity(intent);
                     finish();
+                    StopMedia();
                 }
             }
         });
@@ -114,6 +122,7 @@ public class SeccionView extends AppCompatActivity {
                 speakRequest.stopSpeak();
                 startActivity(intent);
                 finish();
+                StopMedia();
             }
         });
 
@@ -133,11 +142,13 @@ public class SeccionView extends AppCompatActivity {
                     overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_left);
                     speakRequest.stopSpeak();
                     finish();
+                    StopMedia();
                 }else {
                     Intent intent = new Intent(SeccionView.this, HistoriaDetalle.class);
                     intent.putExtra("historia", historia);
                     startActivity(intent);
                     finish();
+                    StopMedia();
                 }
             }
             public void onSwipeLeft() {
@@ -151,6 +162,7 @@ public class SeccionView extends AppCompatActivity {
                     speakRequest.stopSpeak();
                     startActivity(intent);
                     finish();
+                    StopMedia();
                 }
             }
             public void onSwipeBottom() {
@@ -162,10 +174,23 @@ public class SeccionView extends AppCompatActivity {
     }
 
     public void escucharSeccion(View view) {
-        if(speakRequest.isSpeaking()){
-            speakRequest.stopSpeak();
+        Uri myUri = Uri.parse("http://ec2-54-244-63-119.us-west-2.compute.amazonaws.com/story/public/audio/"+seccion.getAudioUrl());
+        if(mediaPlayer.isPlaying()){
+
+        }else{
+            try {
+                mediaPlayer.setDataSource(this, myUri);
+                mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
+                mediaPlayer.prepare(); //don't use prepareAsync for mp3 playback
+
+                mediaPlayer.start();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
-        String texto = seccion.getName()+". \n"+seccion.getDescription();
-        speakRequest.speak(texto);
+    }
+
+    private void StopMedia(){
+        mediaPlayer.stop();
     }
 }
