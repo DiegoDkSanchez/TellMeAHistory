@@ -58,7 +58,6 @@ public class sectionAdapter extends  RecyclerView.Adapter<sectionAdapter.ViewHol
 
 
         public ViewHolder(View v){
-
             //recibe la vista completa para que la rendericemos, pasamos parametros a constructor padre
             // aqui tambien manejamos los datos de logioca para extraer datos y hacer referencias con los elementoss
             super(v);
@@ -69,9 +68,6 @@ public class sectionAdapter extends  RecyclerView.Adapter<sectionAdapter.ViewHol
         public void bind(final SectionsItem sectionsItem, final  onItemClickListener listener){
             //procesamos los datos para renderizar
             portada = (ImageView) itemView.findViewById(R.id.txthistoriaportada);
-
-
-
             Glide.with(portada.getContext()).load("http://ec2-54-244-63-119.us-west-2.compute.amazonaws.com/story/public/images/"+
                     sectionsItem.getUrl()).into(portada);
 
