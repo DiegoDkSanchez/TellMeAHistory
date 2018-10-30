@@ -30,7 +30,7 @@ import sv.dk.com.dimeunahistoria.Modelos.Story;
 public class HistoriaDetalle extends AppCompatActivity{
 
     Story historia;
-    ImageView portada;
+    ImageView portada, banner;
     TextView titulo, categoria, autor;
     LinearLayout fondoDetalle;
     RecyclerView recyclerView;
@@ -43,6 +43,7 @@ public class HistoriaDetalle extends AppCompatActivity{
         setContentView(R.layout.activity_historia_detalle);
 
         recyclerView = (RecyclerView) findViewById(R.id.seccionRecycler);
+        banner = findViewById(R.id.imgBanner);
 
         //findViewById
         /*
@@ -84,7 +85,8 @@ public class HistoriaDetalle extends AppCompatActivity{
         });
 
         recyclerView.setAdapter(adapter);
-
+        Glide.with(banner.getContext()).load("http://ec2-54-244-63-119.us-west-2.compute.amazonaws.com/story/public/images/"+
+                historia.getUrlBanner()).into(banner);
 
     }
 

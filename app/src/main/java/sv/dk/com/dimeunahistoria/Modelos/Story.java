@@ -31,6 +31,9 @@ public class Story implements Serializable{
 	@SerializedName("url")
 	private String url;
 
+	@SerializedName("url_banner")
+	private String urlBanner;
+
 	@SerializedName("category")
 	private Category category;
 
@@ -48,6 +51,7 @@ public class Story implements Serializable{
 		id = in.readInt();
 		state = in.readInt();
 		url = in.readString();
+		urlBanner = in.readString();
 	}
 
 
@@ -113,6 +117,14 @@ public class Story implements Serializable{
 
 	public Category getCategory(){
 		return category;
+	}
+
+	public String getUrlBanner() {
+		return urlBanner;
+	}
+
+	public void setUrlBanner(String urlBanner) {
+		this.urlBanner = urlBanner;
 	}
 
 	public void setDeletedAt(Object deletedAt){

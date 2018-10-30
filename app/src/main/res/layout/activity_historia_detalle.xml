@@ -7,8 +7,17 @@
     android:background="#efefef"
     tools:context="sv.dk.com.dimeunahistoria.HistoriaDetalle">
 
+    <ImageView
+        android:id="@+id/imgBanner"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:scaleType="fitCenter" />
+
 
             <android.support.v7.widget.RecyclerView
+                android:layout_marginTop="80dp"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp"
                 android:id="@+id/seccionRecycler"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
