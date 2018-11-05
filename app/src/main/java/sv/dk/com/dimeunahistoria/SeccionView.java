@@ -26,7 +26,7 @@ import sv.dk.com.dimeunahistoria.Speaker.SpeakRequest;
 
 public class SeccionView extends AppCompatActivity {
 
-    ImageView imagen;
+    ImageView imagen, banner;
     TextView contenido, titulo, subtitulo, numPaginas;
     Button atras, adelante, listenButton;
     CardView cardView;
@@ -45,6 +45,7 @@ public class SeccionView extends AppCompatActivity {
         setContentView(R.layout.activity_seccion_view);
 
         //FindViewById
+        banner = findViewById(R.id.imgBannerSeccion);
         listenButton = findViewById(R.id.listenButton);
         imagen = (ImageView) findViewById(R.id.imagenHistoria);
         contenido = (TextView) findViewById(R.id.txtContenidoHistoria);
@@ -74,6 +75,20 @@ public class SeccionView extends AppCompatActivity {
             Glide.with(this).load("http://ec2-54-244-63-119.us-west-2.compute.amazonaws.com/story/public/images/"+
                     historia.getUrl()).into(imagen);
         }
+
+        Glide.with(banner.getContext()).load("http://ec2-54-244-63-119.us-west-2.compute.amazonaws.com/story/public/images/"+
+                historia.getUrlBanner()).into(banner);
+
+        banner.setClickable(true);
+        banner.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(SeccionView.this, HistoriaDetalle.class);
+                intent.putExtra("historia", historia);
+                startActivity(intent);
+                finish();
+            }
+        });
 
 //      titulo.setText(historia.getName());
         if(seccion.getName()!=null){

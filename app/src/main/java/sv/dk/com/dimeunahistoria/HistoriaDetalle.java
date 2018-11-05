@@ -88,6 +88,16 @@ public class HistoriaDetalle extends AppCompatActivity{
         Glide.with(banner.getContext()).load("http://ec2-54-244-63-119.us-west-2.compute.amazonaws.com/story/public/images/"+
                 historia.getUrlBanner()).into(banner);
 
+        banner.setClickable(true);
+        banner.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(HistoriaDetalle.this, MainActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        });
+
     }
 
 

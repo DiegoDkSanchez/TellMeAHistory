@@ -1,11 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#efefef"
+    android:orientation="vertical"
     tools:context="sv.dk.com.dimeunahistoria.SeccionView">
+
+    <ImageView
+        android:id="@+id/imgBannerSeccion"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:scaleType="fitCenter" />
 
 <android.support.v7.widget.CardView
     android:id="@+id/CardViewSeccion"
@@ -88,4 +95,4 @@
 
 </android.support.v7.widget.CardView>
 
-</RelativeLayout>
+</LinearLayout>
