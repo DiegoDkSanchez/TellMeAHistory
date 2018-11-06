@@ -2,7 +2,6 @@ package sv.dk.com.dimeunahistoria;
 
 import android.content.Context;
 import android.content.Intent;
-import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
@@ -13,7 +12,6 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 
@@ -21,10 +19,10 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 
-import sv.dk.com.dimeunahistoria.Modelos.Historia;
+import sv.dk.com.dimeunahistoria.Model.CategoriesItem;
+import sv.dk.com.dimeunahistoria.Model.StoryItem;
 import sv.dk.com.dimeunahistoria.Modelos.Seccion;
 import sv.dk.com.dimeunahistoria.Modelos.SectionsItem;
-import sv.dk.com.dimeunahistoria.Modelos.Story;
 import sv.dk.com.dimeunahistoria.Speaker.SpeakRequest;
 
 public class SeccionView extends AppCompatActivity {
@@ -36,8 +34,9 @@ public class SeccionView extends AppCompatActivity {
 
     private int pagina;
     private SpeakRequest speakRequest;
-    private Story historia;
-    private SectionsItem seccion;
+    private CategoriesItem categoriesItem;
+    private StoryItem historia;
+    private sv.dk.com.dimeunahistoria.Model.SectionsItem seccion;
     private boolean NotIsFinalPage = true;
     private ArrayList<Seccion> secciones = new ArrayList<>();
     MediaPlayer mediaPlayer = new MediaPlayer();
@@ -50,7 +49,6 @@ public class SeccionView extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_seccion_view);
 
-        loading.setVisibility(View.INVISIBLE);
 
         //FindViewById
         banner = findViewById(R.id.imgBannerSeccion);
@@ -62,10 +60,10 @@ public class SeccionView extends AppCompatActivity {
         titulo = (TextView) findViewById(R.id.txtTituloSeccion);
         subtitulo = (TextView) findViewById(R.id.txtSubtituloSeccion);
         numPaginas = (TextView) findViewById(R.id.txtNumPagina);
-        loading = findViewById(R.id.progressBarSeccion);
         cardView = findViewById(R.id.CardViewSeccion);
         pagina = (int) getIntent().getSerializableExtra("pagina");
-        historia = (Story) getIntent().getSerializableExtra("historia");
+        categoriesItem = (CategoriesItem) getIntent().getSerializableExtra("categoriesItem");
+        historia = (StoryItem) getIntent().getSerializableExtra("storyItem");
         //secciones = (ArrayList<Seccion>) getIntent().getSerializableExtra("lista");
         seccion = historia.getSections().get(pagina);
 
@@ -73,7 +71,7 @@ public class SeccionView extends AppCompatActivity {
             speakRequest = new SpeakRequest(this);
         }
 
-        if(pagina==historia.getSections().size()-1){
+        if(pagina== historia.getSections().size()-1){
             adelante.setVisibility(View.INVISIBLE);
             NotIsFinalPage = false;
         }
@@ -82,24 +80,24 @@ public class SeccionView extends AppCompatActivity {
                     seccion.getUrl()).into(imagen);
         }else {
             Glide.with(this).load("http://ec2-54-244-63-119.us-west-2.compute.amazonaws.com/story/public/images/"+
-                    historia.getUrl()).into(imagen);
+                    categoriesItem.getUrl()).into(imagen);
         }
 
         Glide.with(banner.getContext()).load("http://ec2-54-244-63-119.us-west-2.compute.amazonaws.com/story/public/images/"+
-                historia.getUrlBanner()).into(banner);
+                categoriesItem.getUrlBanner()).into(banner);
 
         banner.setClickable(true);
         banner.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(SeccionView.this, HistoriaDetalle.class);
-                intent.putExtra("historia", historia);
+                intent.putExtra("category", categoriesItem);
                 startActivity(intent);
                 finish();
             }
         });
 
-//      titulo.setText(historia.getName());
+//      titulo.setText(categoriesItem.getName());
         if(seccion.getName()!=null){
 //            subtitulo.setText(seccion.getName());
         }else {
@@ -115,8 +113,9 @@ public class SeccionView extends AppCompatActivity {
             public void onClick(View v) {
                 if(pagina != 0) {
                     Intent intent = new Intent(SeccionView.this, SeccionView.class);
-                    intent.putExtra("historia", historia);
-                    //intent.putExtra("lista", historia.getSections());
+                    intent.putExtra("categoriesItem", categoriesItem);
+                    intent.putExtra("storyItem", historia);
+                    //intent.putExtra("lista", categoriesItem.getSections());
                     pagina -= 1;
                     intent.putExtra("pagina", pagina);
                     startActivity(intent);
@@ -126,7 +125,7 @@ public class SeccionView extends AppCompatActivity {
                     StopMedia();
                 }else {
                     Intent intent = new Intent(SeccionView.this, HistoriaDetalle.class);
-                    intent.putExtra("historia", historia);
+                    intent.putExtra("categoriesItem", categoriesItem);
                     startActivity(intent);
                     finish();
                     StopMedia();
@@ -138,8 +137,9 @@ public class SeccionView extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(SeccionView.this, SeccionView.class);
-                intent.putExtra("historia", historia);
-                //intent.putExtra("lista", historia.getSecciones());
+                intent.putExtra("categoriesItem", categoriesItem);
+                intent.putExtra("storyItem", historia);
+                //intent.putExtra("lista", categoriesItem.getSecciones());
                 pagina += 1;
                 intent.putExtra("pagina", pagina);
                 overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_right);
@@ -158,8 +158,9 @@ public class SeccionView extends AppCompatActivity {
             public void onSwipeRight() {
                 if(pagina != 0) {
                     Intent intent = new Intent(SeccionView.this, SeccionView.class);
-                    intent.putExtra("historia", historia);
-                    //intent.putExtra("lista", historia.getSections());
+                    intent.putExtra("categoriesItem", categoriesItem);
+                    intent.putExtra("storyItem", historia);
+                    //intent.putExtra("lista", categoriesItem.getSections());
                     pagina -= 1;
                     intent.putExtra("pagina", pagina);
                     startActivity(intent);
@@ -169,7 +170,8 @@ public class SeccionView extends AppCompatActivity {
                     StopMedia();
                 }else {
                     Intent intent = new Intent(SeccionView.this, HistoriaDetalle.class);
-                    intent.putExtra("historia", historia);
+                    intent.putExtra("categoriesItem", categoriesItem);
+                    intent.putExtra("storyItem", historia);
                     startActivity(intent);
                     finish();
                     StopMedia();
@@ -178,8 +180,9 @@ public class SeccionView extends AppCompatActivity {
             public void onSwipeLeft() {
                 if(NotIsFinalPage){
                     Intent intent = new Intent(SeccionView.this, SeccionView.class);
-                    intent.putExtra("historia", historia);
-                    //intent.putExtra("lista", historia.getSecciones());
+                    intent.putExtra("categoriesItem", categoriesItem);
+                    intent.putExtra("storyItem", historia);
+                    //intent.putExtra("lista", categoriesItem.getSecciones());
                     pagina += 1;
                     intent.putExtra("pagina", pagina);
                     overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_right);

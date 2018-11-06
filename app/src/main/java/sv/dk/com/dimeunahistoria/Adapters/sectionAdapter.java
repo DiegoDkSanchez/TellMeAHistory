@@ -9,7 +9,9 @@ import com.bumptech.glide.Glide;
 
 import java.util.List;
 
+import sv.dk.com.dimeunahistoria.Model.StoryItem;
 import sv.dk.com.dimeunahistoria.Modelos.SectionsItem;
+import sv.dk.com.dimeunahistoria.Modelos.Story;
 import sv.dk.com.dimeunahistoria.R;
 
 /**
@@ -19,11 +21,11 @@ import sv.dk.com.dimeunahistoria.R;
 public class sectionAdapter extends  RecyclerView.Adapter<sectionAdapter.ViewHolder>{
 
 
-    private List<SectionsItem> purposesList;
+    private List<StoryItem> purposesList;
     private int layout;
     private onItemClickListener listener;
 
-    public sectionAdapter(List<SectionsItem> Purposes, int layout, onItemClickListener listener) {
+    public sectionAdapter(List<StoryItem> Purposes, int layout, onItemClickListener listener) {
             this.purposesList = Purposes;
             this.layout = layout;
             this.listener = listener;
@@ -65,7 +67,7 @@ public class sectionAdapter extends  RecyclerView.Adapter<sectionAdapter.ViewHol
 
         }
 
-        public void bind(final SectionsItem sectionsItem, final  onItemClickListener listener){
+        public void bind(final StoryItem sectionsItem, final  onItemClickListener listener){
             //procesamos los datos para renderizar
             portada = (ImageView) itemView.findViewById(R.id.txthistoriaportada);
             Glide.with(portada.getContext()).load("http://ec2-54-244-63-119.us-west-2.compute.amazonaws.com/story/public/images/"+
@@ -83,6 +85,6 @@ public class sectionAdapter extends  RecyclerView.Adapter<sectionAdapter.ViewHol
     }
     ///declaramos las interfaces con los metodos a implementar
     public interface onItemClickListener{
-        void onItemClick(SectionsItem sectionsItem, int position);
+        void onItemClick(StoryItem sectionsItem, int position);
     }
 }

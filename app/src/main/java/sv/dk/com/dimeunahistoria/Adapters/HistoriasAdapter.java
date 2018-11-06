@@ -23,6 +23,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import sv.dk.com.dimeunahistoria.HistoriaDetalle;
+import sv.dk.com.dimeunahistoria.Model.CategoriesItem;
 import sv.dk.com.dimeunahistoria.Modelos.Historia;
 import sv.dk.com.dimeunahistoria.Modelos.Story;
 import sv.dk.com.dimeunahistoria.R;
@@ -33,13 +34,13 @@ import sv.dk.com.dimeunahistoria.R;
 
 public class HistoriasAdapter extends RecyclerView.Adapter<HistoriasAdapter.ViewHolder> {
 
-    private List<Story> listaHistorias;
+    private List<CategoriesItem> listaHistorias;
     private LayoutInflater mInflater;
     private ItemClickListener mClickListener;
     private Context context;
     private int lastPosition = -1;
 
-    public HistoriasAdapter(Context context, List<Story> listaHistorias) {
+    public HistoriasAdapter(Context context, List<CategoriesItem> listaHistorias) {
         this.context = context;
         this.mInflater = LayoutInflater.from(context);
         this.listaHistorias = listaHistorias;
