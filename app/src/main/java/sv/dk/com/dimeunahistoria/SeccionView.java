@@ -1,5 +1,6 @@
 package sv.dk.com.dimeunahistoria;
 
+import android.content.Context;
 import android.content.Intent;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
@@ -10,11 +11,13 @@ import android.support.v7.widget.CardView;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -38,11 +41,16 @@ public class SeccionView extends AppCompatActivity {
     private boolean NotIsFinalPage = true;
     private ArrayList<Seccion> secciones = new ArrayList<>();
     MediaPlayer mediaPlayer = new MediaPlayer();
+    private ProgressBar loading;
+
+    CacheableAudio cacheableAudio = new CacheableAudio();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_seccion_view);
+
+        loading.setVisibility(View.INVISIBLE);
 
         //FindViewById
         banner = findViewById(R.id.imgBannerSeccion);
@@ -54,6 +62,7 @@ public class SeccionView extends AppCompatActivity {
         titulo = (TextView) findViewById(R.id.txtTituloSeccion);
         subtitulo = (TextView) findViewById(R.id.txtSubtituloSeccion);
         numPaginas = (TextView) findViewById(R.id.txtNumPagina);
+        loading = findViewById(R.id.progressBarSeccion);
         cardView = findViewById(R.id.CardViewSeccion);
         pagina = (int) getIntent().getSerializableExtra("pagina");
         historia = (Story) getIntent().getSerializableExtra("historia");
@@ -189,7 +198,11 @@ public class SeccionView extends AppCompatActivity {
     }
 
     public void escucharSeccion(View view) {
-        Uri myUri = Uri.parse("http://ec2-54-244-63-119.us-west-2.compute.amazonaws.com/story/public/audio/"+seccion.getAudioUrl());
+
+
+        cacheableAudio.playCacheableAudio(this, "http://ec2-54-244-63-119.us-west-2.compute.amazonaws.com/story/public/audio/"+seccion.getAudioUrl());
+
+        /*Uri myUri = Uri.parse(f.getAbsolutePath());
         if(mediaPlayer.isPlaying()){
 
         }else{
@@ -202,7 +215,18 @@ public class SeccionView extends AppCompatActivity {
             } catch (IOException e) {
                 e.printStackTrace();
             }
+        }*/
+    }
+
+    private File getTempFile(Context context, String url) {
+        File file = null;
+        try {
+            String fileName = Uri.parse(url).getLastPathSegment();
+            file = File.createTempFile(fileName, null, context.getCacheDir());
+        } catch (IOException e) {
+            e.printStackTrace();
         }
+        return file;
     }
 
     private void StopMedia(){
